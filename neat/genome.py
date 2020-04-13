@@ -32,6 +32,7 @@ class DefaultGenomeConfig(object):
                         ConfigParameter('num_outputs', int),
                         ConfigParameter('num_hidden', int),
                         ConfigParameter('feed_forward', bool),
+                        ConfigParameter('no_output_loopbacks', bool),
                         ConfigParameter('compatibility_disjoint_coefficient', float),
                         ConfigParameter('compatibility_weight_coefficient', float),
                         ConfigParameter('conn_add_prob', float),
@@ -345,6 +346,8 @@ class DefaultGenome(object):
         out_node = choice(possible_outputs)
 
         possible_inputs = possible_outputs + config.input_keys
+        if config.no_output_loopbacks:
+            possible_inputs = list(set(possible_inputs) - set(config.output_keys))
         in_node = choice(possible_inputs)
 
         # Don't duplicate connections.
