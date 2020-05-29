@@ -3,13 +3,7 @@ from __future__ import print_function
 
 import os
 import warnings
-
-try:
-    from configparser import ConfigParser
-except ImportError:
-    from ConfigParser import SafeConfigParser as ConfigParser
-
-from neat.six_util import iterkeys
+from configparser import ConfigParser
 
 
 class ConfigParameter(object):
@@ -117,7 +111,7 @@ class DefaultClassConfig(object):
         for p in param_list:
             setattr(self, p.name, p.interpret(param_dict))
             param_list_names.append(p.name)
-        unknown_list = [x for x in iterkeys(param_dict) if x not in param_list_names]
+        unknown_list = [x for x in param_dict if x not in param_list_names]
         if unknown_list:
             if len(unknown_list) > 1:
                 raise UnknownConfigItemError("Unknown configuration items:\n" +
@@ -178,7 +172,7 @@ class Config(object):
                                   DeprecationWarning)
             param_list_names.append(p.name)
         param_dict = dict(parameters.items('NEAT'))
-        unknown_list = [x for x in iterkeys(param_dict) if x not in param_list_names]
+        unknown_list = [x for x in param_dict if x not in param_list_names]
         if unknown_list:
             if len(unknown_list) > 1:
                 raise UnknownConfigItemError("Unknown (section 'NEAT') configuration items:\n" +
