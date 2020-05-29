@@ -38,6 +38,7 @@ enabled_mutate_rate     = 0.01
 
 feed_forward            = True
 initial_connection      = full
+no_output_loopbacks     = False
 
 # node add/remove rates
 node_add_prob           = 0.2
