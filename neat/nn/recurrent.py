@@ -41,6 +41,14 @@ class RecurrentNetwork(object):
 
         return [ovalues[i] for i in self.output_nodes]
 
+    @property
+    def ovalues(self):
+        return self.values[self.active]
+
+    @property
+    def ivalues(self):
+        return self.values[1-self.active]
+
     @staticmethod
     def create(genome, config):
         """ Receives a genome and returns its phenotype (a RecurrentNetwork). """
